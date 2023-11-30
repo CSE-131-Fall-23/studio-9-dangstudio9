@@ -34,8 +34,8 @@ public class Polynomial {
 		String result= "";
 		for(int i= 0; i < list.size(); i++) {
 			if (i== list.size()-1) {
-				String term = list.get(i)+ " x^"+(list.size()-i-1);
-				result= result+term;
+				Double lastTerm = list.get(i);
+				result= result+lastTerm;
 			} else {
 			String term = list.get(i)+ " x^"+(list.size()-i-1)+ " + ";
 			result= result+term;
@@ -51,10 +51,9 @@ public class Polynomial {
 	 * @return value of polynomial at that x
 	 */
 	public double evaluate(double x) {
-		Double answer= 0.0;
+		double answer= 0.0;
 		for(int i= 0; i < list.size(); i++) {
-			Double term = list.get(i)+ Math.pow(x, list.size()-i-1);
-			answer= answer+term;
+			answer= answer+ (list.get(i)* Math.pow(x, (list.size()-i-1)));
 			
 		}
 		return answer;
@@ -63,13 +62,12 @@ public class Polynomial {
 	
 	public Polynomial derivative() {
 		Polynomial result= new Polynomial();
-		for(int i= 0; i < list.size(); i++) {
+		for(int i= 0; i < list.size()-1; i++) {
 			double newCoeff = list.get(i)*(list.size()-i-1) ;
-			if (i== list.size()-1) {
 				result.addTerm(newCoeff);
 		}
+		
 		return result;
-	}
 	}
 	
 
